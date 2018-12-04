@@ -20,7 +20,7 @@ public class APIController {
     ConvertionServices service;
 
     @GetMapping("/fahrenheit/{value}")
-    public ResponseEntity<?> postConvertToFahrenheitHandler(@PathVariable Float value) {
+    public ResponseEntity<?> getConvertToFahrenheitHandler(@PathVariable Float value) {
         try {
             Unit fahrenheit = service.ConvertToFahrenheit(value);
             fahrenheit.setType("ToFahrenheit");
@@ -32,7 +32,7 @@ public class APIController {
     }
 
     @GetMapping("/celsius/{value}")
-    public ResponseEntity<?> postConvertToCelsiusHandler(@PathVariable Float value) {
+    public ResponseEntity<?> getConvertToCelsiusHandler(@PathVariable Float value) {
         try {
 
             Unit celsius = service.ConvertToCelsius(value);

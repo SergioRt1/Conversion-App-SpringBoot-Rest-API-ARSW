@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.BufferedReader;
@@ -21,11 +22,14 @@ import java.util.logging.Logger;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ParcialApplicationTests {
 
     @Autowired
     ConvertionServices services;
+
+    @LocalServerPort
+    private int port;
 
     @Test
     public void contextLoads() {
@@ -81,7 +85,7 @@ public class ParcialApplicationTests {
         @Override
         public void run() {
             String queryB;
-            String GET_URL = "http://localhost:8080/convertion/fahrenheit/50";
+            String GET_URL = "http://localhost:"+port+"/convertion/fahrenheit/50";
             URL obj = null;
             try {
                 obj = new URL(GET_URL);
