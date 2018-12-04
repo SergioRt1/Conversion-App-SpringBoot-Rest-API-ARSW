@@ -9,6 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ParcialApplicationTests {
@@ -38,5 +49,60 @@ public class ParcialApplicationTests {
     @Test
     public void toCelsius2() throws ConvertException {
         Assert.assertEquals(10, services.ConvertToCelsius((float) 50).getValue(),0.1);
+    }
+
+
+
+
+    @Test
+    public void concurrentQuery() {
+        List<Thread> threads = new ArrayList<>();
+        int numThreads = 10;
+        for (int i = 0; i < numThreads; i++) {
+            threads.add(new ThreadTest());
+        }
+        for (Thread t: threads) {
+            t.start();
+        }
+        for(Thread t: threads){
+            try {
+                t.join();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ParcialApplicationTests.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }
+
+    public class ThreadTest extends Thread {
+
+        private final String USER_AGENT = "Mozilla/5.0";
+
+        @Override
+        public void run() {
+            String queryB;
+            String GET_URL = "http://localhost:8080/convertion/fahrenheit/50";
+            URL obj = null;
+            try {
+                obj = new URL(GET_URL);
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+                con.setRequestMethod("GET");
+                con.setRequestProperty("User-Agent", USER_AGENT);
+                int responseCode = con.getResponseCode();
+                Assert.assertEquals(201,responseCode);
+                BufferedReader in = new BufferedReader(new InputStreamReader(
+                        con.getInputStream()));
+                StringBuffer response = new StringBuffer();
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                Assert.assertEquals("{\"value\":122.0,\"type\":\"ToFahrenheit\"}",response.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }
