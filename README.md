@@ -17,7 +17,11 @@ El restAPI provee mediante el verbo GET dos rutas una en /convertion/fahrenheit/
 
 Se realizan pruebas concurrentes sobre el RestAPI para verifiar su funcionamiento ante llamados concurentes.
 
+### Diagrama de componentes
+
 ![](img/component.png)
+
+### Diagrama de clases
 
 ![](img/clases.png)
 
