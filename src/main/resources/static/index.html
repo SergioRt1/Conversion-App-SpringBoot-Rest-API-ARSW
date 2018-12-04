@@ -5,6 +5,18 @@
     <title>Title</title>
 </head>
 <body>
-index :)
+<p>La conexion se realiza atraves del verbo GET en /convertion/fahrenheit/{value} para convertir de celcius a fahrenheit, y GET en /convertion/celsius/{value} para convertir de fahrenheit a celcius
+    Este retorna un objeto JSON en el siguente formato {"value":valor convertdo, "type":tipo de la conversion realizada}
+</p>
+<div>
+    <input type="text" id="number" placeholder="Number">
+    <button type="button" onclick="Controller.ToCelsius()">To Celsius</button>
+    <button type="button" onclick="Controller.ToFahrenheit();">To Fahrenheit</button>
+    <br>
+    <label >contvertion: </label>
+    <label id="ans"></label>
+</div>
+<script type="text/javascript" src="js/Controller.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
 </html>

@@ -22,21 +22,21 @@ public class ParcialApplicationTests {
 
     @Test
     public void toFahrenheit1() throws ConvertException {
-        Assert.assertEquals((float) 71.6, services.ConvertToFahrenheit((float) 22),0.1);
+        Assert.assertEquals( 71.6, services.ConvertToFahrenheit((float) 22).getValue(),0.1);
     }
 
     @Test
     public void toCelsius1() throws ConvertException {
-        Assert.assertEquals((float) 22, services.ConvertToCelsius((float) 71.6),0.1);
+        Assert.assertEquals(22, services.ConvertToCelsius((float) 71.6).getValue(),0.1);
     }
 
     @Test
     public void toFahrenheit2() throws ConvertException {
-        Assert.assertEquals((float) 50, services.ConvertToFahrenheit((float) 10),0.1);
+        Assert.assertEquals(50, services.ConvertToFahrenheit((float) 10).getValue(),0.1);
     }
 
     @Test
     public void toCelsius2() throws ConvertException {
-        Assert.assertEquals((float) 10, services.ConvertToCelsius((float) 50),0.1);
+        Assert.assertEquals(10, services.ConvertToCelsius((float) 50).getValue(),0.1);
     }
 }

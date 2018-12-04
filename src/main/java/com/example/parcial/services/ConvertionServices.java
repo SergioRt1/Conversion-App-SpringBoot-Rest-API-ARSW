@@ -1,8 +1,10 @@
 package com.example.parcial.services;
 
+import com.example.parcial.model.Unit;
+
 public interface ConvertionServices {
 
-    float ConvertToCelsius(Float value) throws ConvertException;
+    Unit ConvertToCelsius(Float value) throws ConvertException;
 
-    float ConvertToFahrenheit(Float value) throws ConvertException;
+    Unit ConvertToFahrenheit(Float value) throws ConvertException;
 }

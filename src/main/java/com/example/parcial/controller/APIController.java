@@ -1,5 +1,6 @@
 package com.example.parcial.controller;
 
+import com.example.parcial.model.Unit;
 import com.example.parcial.services.ConvertException;
 import com.example.parcial.services.ConvertionServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,8 @@ public class APIController {
     @GetMapping("/fahrenheit/{value}")
     public ResponseEntity<?> postConvertToFahrenheitHandler(@PathVariable Float value) {
         try {
-            Float fahrenheit = service.ConvertToFahrenheit(value);
+            Unit fahrenheit = service.ConvertToFahrenheit(value);
+            fahrenheit.setType("ToFahrenheit");
             return new ResponseEntity<>(fahrenheit,HttpStatus.CREATED);
         } catch (ConvertException ex) {
             Logger.getLogger(ConvertException.class.getName()).log(Level.SEVERE, null, ex);
@@ -33,7 +35,8 @@ public class APIController {
     public ResponseEntity<?> postConvertToCelsiusHandler(@PathVariable Float value) {
         try {
 
-            Float celsius = service.ConvertToCelsius(value);
+            Unit celsius = service.ConvertToCelsius(value);
+            celsius.setType("ToCelcius");
             return new ResponseEntity<>(celsius,HttpStatus.CREATED);
         } catch (ConvertException ex) {
             Logger.getLogger(ConvertException.class.getName()).log(Level.SEVERE, null, ex);
