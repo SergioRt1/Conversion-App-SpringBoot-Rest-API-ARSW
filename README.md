@@ -1,6 +1,8 @@
 # Convertion app
 
-#### parcial-final-ARSW
+#### parcial final ARSW
+
+##### Sergio Andrés Rodríguez Torres
 
 La aplicacion consta de in restAPI que provee ds servicios para la convericion de unidades, estos son celcius a fahrenheit y fahrenheit a celcius.
 
